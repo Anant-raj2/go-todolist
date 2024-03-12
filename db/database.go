@@ -9,7 +9,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Connect() {
+func Connect() *sql.DB {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Error loading .env file")
@@ -23,12 +23,12 @@ func Connect() {
 		fmt.Println("Database connected successfully!")
 	}
 
-	err = db.Ping()
-	if err != nil {
-		panic(err)
-	} else {
-		fmt.Println("Database pinged successfully!")
-	}
+	// err = db.Ping()
+	// if err != nil {
+	// 	panic(err)
+	// } else {
+	// 	fmt.Println("Database pinged successfully!")
+	// }
 
-	defer db.Close()
+	return db
 }
