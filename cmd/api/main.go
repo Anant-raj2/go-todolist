@@ -14,6 +14,7 @@ func main() {
 	r.GET("/posts/:id", handlers.GetPost)
 	r.GET("/posts", handlers.GetAllPosts)
 	r.POST("/create-post", handlers.CreatePost)
+	r.GET("/delete-post/:id", handlers.DeletePost)
 
 	r.Run("localhost:8000")
 }

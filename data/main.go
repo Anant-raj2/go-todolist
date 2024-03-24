@@ -4,8 +4,6 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/google/uuid"
-
 	"github.com/Anant-raj2/todolist/db"
 )
 
@@ -13,7 +11,7 @@ func GetAllPosts() []Post {
 	var db *sql.DB = db.Connect()
 	var posts []Post = []Post{}
 
-	results, err := db.Query("SELECT * FROM todos")
+	results, err := db.Query("SELECT * FROM todostest")
 	if err != nil {
 		panic(err)
 	}
@@ -51,12 +49,23 @@ func GetPostById(param string) *Post {
 
 func CreatePost(post Post) {
 	var db *sql.DB = db.Connect()
-	var id string = uuid.NewString()
+	// var id string = uuid.NewString()
+	idNew := "2"
 	var createdAt string = time.Now().Format("2006-01-02 15:04:05")
 	defer db.Close()
 	_, err := db.Query(
-		"INSERT INTO todos VALUES ('" + id + "', '" + post.Title + "', '" + createdAt + "')",
+		"INSERT INTO todostest VALUES ('" + idNew + "', '" + post.Title + "', '" + createdAt + "')",
 	)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func DeletePost(param string) {
+	var db *sql.DB = db.Connect()
+	defer db.Close()
+
+	_, err := db.Query("DELETE FROM todostest WHERE id=" + param + "")
 	if err != nil {
 		panic(err)
 	}
